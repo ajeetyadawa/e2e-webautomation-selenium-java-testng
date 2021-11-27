@@ -20,6 +20,8 @@ WebDriver driver;
 		PageFactory.initElements(driver, this);
 	}
 	
+	
+	
 	public void logOff() {
 		profileNav.click();
 		logout.click();

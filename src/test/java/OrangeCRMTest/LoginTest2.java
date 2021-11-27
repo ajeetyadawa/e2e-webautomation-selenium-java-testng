@@ -1,5 +1,7 @@
 package OrangeCRMTest;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -8,6 +10,7 @@ import org.testng.annotations.Test;
 
 import OrangeCRMPages.HomePage;
 import OrangeCRMPages.LoginPage;
+import Util.RunCommandLine;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginTest2 {
@@ -31,8 +34,9 @@ public class LoginTest2 {
 	}
 	
 	@AfterTest
-	public void closeSetUp() {
+	public void closeSetUp() throws InterruptedException, IOException {
 		driver.close();
+		RunCommandLine.executeCMD("taskkill /im chromedriver.exe /f");
 	}
 	
 }

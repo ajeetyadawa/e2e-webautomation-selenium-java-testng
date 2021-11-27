@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Test(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="OrangeCRMTest.LoginTest2">
+      <class name="OrangeCRMTest.LoginTest">
         <methods>
-          <include name="closeSetUp"/>
-          <include name="LogOff"/>
+          <include name="driverClose"/>
+          <include name="homePageTest"/>
         </methods>
-      </class> <!-- OrangeCRMTest.LoginTest2 -->
+      </class> <!-- OrangeCRMTest.LoginTest -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

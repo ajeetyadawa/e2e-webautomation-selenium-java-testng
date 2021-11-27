@@ -1,5 +1,6 @@
 package OrangeCRMTest;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -11,18 +12,25 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import Util.PropReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 
 	public static WebDriver driver;
 	public static String browserName;
+	public static String username;
+	public static String password;
+	public static String driverPath;
+	public static PropReader property;
+	
 	 public static WebDriver getDriver() {
 	        return driver;
 	    }
 	@BeforeTest
-	public void browserLaunch() {
-		browserName="Chrome";
+	public void browserLaunch() throws IOException {
+		property= new PropReader();
+		browserName=property.getValue("browser");
 		if(browserName.equalsIgnoreCase("Chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
@@ -32,14 +40,16 @@ public class BaseTest {
 			driver = new FirefoxDriver();
 		}
 		else if(browserName.equalsIgnoreCase("ie")) {
-			System.setProperty("webdriver.ie.driver","E:\\SeleniumJar\\IEDriverServer_x64_4.0.0\\IEDriverServer.exe");
+			driverPath =property.getValue("iedriverpath");
+			System.setProperty("webdriver.ie.driver",driverPath);
 			driver = new InternetExplorerDriver();
 		}
 		else {
-			System.setProperty("webdriver.edge.driver", "E:\\SeleniumJar\\edgedriver_win64\\msedgedriver.exe");
+			driverPath =property.getValue("edgedriverpath");
+			System.setProperty("webdriver.edge.driver", driverPath);
 			driver = new EdgeDriver();
 		}
-		driver.get("https://opensource-demo.orangehrmlive.com/");
+		driver.get(property.getValue("url"));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(45, TimeUnit.SECONDS);
 	}
